@@ -27,7 +27,7 @@ RSpec.describe Resource, type: :model do
       before do
         @from = Date.today.next_week + 9.hours
         @to = @from + 2.hours
-        subject.be_booked! user, time_start: @from, time_end: @to, amount: subject.capacity
+        subject.be_booked! user, time_start: @from, time_end: @to, amount: subject.capacity, client: 'Client'
       end
 
       it 'adds booking' do
@@ -36,7 +36,7 @@ RSpec.describe Resource, type: :model do
 
       it 'rejects identical booking with ActsAsBookable::AvailabilityError' do
         expect {
-          subject.be_booked! user, time_start: @from, time_end: @to, amount: 4
+          subject.be_booked! user, time_start: @from, time_end: @to, amount: 4, client: 'Client'
         }.to raise_error(ActsAsBookable::AvailabilityError, 'The room is already booked')
       end
 
@@ -54,7 +54,7 @@ RSpec.describe Resource, type: :model do
       Timecop.freeze('2016-01-01')
       from = Date.today + 15.hour + 30.minutes
       to = from + 1.hour
-      @booking = subject.be_booked! user, time_start: from, time_end: to, amount: 4
+      @booking = subject.be_booked! user, time_start: from, time_end: to, amount: 4, client: 'Client'
     end
 
     it 'returns a list of today´s bookings' do
