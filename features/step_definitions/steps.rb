@@ -156,6 +156,7 @@ Given(/^I click on "([^"]*)"$/) do |element|
 end
 
 Given(/^I click on card for "([^"]*)"$/) do |element|
+  binding.pry
   find('.card-title', text: element).click
   sleep(0.1) until page.evaluate_script('$.active') == 0
 end
@@ -166,12 +167,12 @@ end
 
 And(/^I click "([^"]*)"$/) do |value|
   within 'main' do
-    find_button(value).trigger('click')
+    find_button(value).click
   end
 end
 
 And(/^I click arrow "([^"]*)"$/) do |id|
-  find("##{id}").trigger('click')
+  find("##{id}").click
   sleep(0.1) until page.evaluate_script('$.active') == 0
 end
 
@@ -220,28 +221,28 @@ end
 
 And(/^I click on dropdown menu "([^"]*)"$/) do |button|
   within 'nav' do
-    find('a', class: 'dropdown-button', text: button, match: :first).trigger('click')
+    find('a', class: 'dropdown-button', text: button, match: :first).click
   end
   sleep 1
 end
 
 And(/^I select menu item "([^"]*)"$/) do |item|
   within 'nav' do
-    find('a', text: item, match: :first).trigger('click')
+    find('a', text: item, match: :first).click
   end
   sleep 1
 end
 
 When(/^I click on menu item "([^"]*)"$/) do |item|
   within 'nav' do
-    find('a', text: item, match: :first).trigger('click')
+    find('a', text: item, match: :first).click
   end
   sleep 1
 end
 
 And(/^I click on footer link "([^"]*)"$/) do |link|
   within 'footer' do
-    find('a', text: link, match: :first).trigger('click')
+    find('a', text: link, match: :first).click
   end
   sleep 1
 end

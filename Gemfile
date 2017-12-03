@@ -58,8 +58,8 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'poltergeist'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
   gem 'timecop'
   gem 'simplecov', git: 'https://github.com/colszowka/simplecov'
   gem 'coveralls', require: false

@@ -1,7 +1,7 @@
 class AddAttachmentAttachmentToFacilties < ActiveRecord::Migration[5.1]
   def self.up
-    change_table :facilities do |t|
-      t.attachment :attachment
+    change_table :restaurants do |t|
+      t.attachment :image
     end
   end
 

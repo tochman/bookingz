@@ -17,9 +17,18 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 30)
+Chromedriver.set_version '2.33'
+
+Capybara.register_driver :chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: {
+          args: %w[ no-sandbox disable-popup-blocking disable-gpu window-size=1280,1024]
+      }
+  )
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
 end
+
 
 Capybara.register_server :puma do |app, port, host|
   require 'puma'
@@ -34,7 +43,7 @@ end
 
 Capybara.server = :puma
 
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :chrome
 Capybara.default_max_wait_time = 10
 
 World(Temporal)
