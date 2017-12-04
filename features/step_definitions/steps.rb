@@ -156,7 +156,6 @@ Given(/^I click on "([^"]*)"$/) do |element|
 end
 
 Given(/^I click on card for "([^"]*)"$/) do |element|
-  binding.pry
   find('.card-title', text: element).click
   sleep(0.1) until page.evaluate_script('$.active') == 0
 end
